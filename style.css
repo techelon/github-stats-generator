@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+/* Base Styles */
+:root {
+    --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --primary: #3b82f6;
+    --primary-dark: #2563eb;
+    --success: #10b981;
+    --warning: #f59e0b;
+    --danger: #ef4444;
+    --card-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    --card-shadow-hover: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+/* Base Elements */
+body {
+    font-family: var(--font-family);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Card Styles */
+.stats-card {
+    @apply relative overflow-hidden rounded-2xl border border-slate-200/50 dark:border-slate-700/50 bg-white/50 dark:bg-slate-800/50 backdrop-blur-xl p-6 transition-all duration-200;
+}
+
+.stats-card:hover {
+    @apply border-slate-300 dark:border-slate-600 bg-white dark:bg-slate-800 shadow-lg;
+}
+
+/* Typography */
+.card-title {
+    @apply text-lg font-semibold text-slate-900 dark:text-white;
+}
+
+.stats-badge {
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400;
+}
+
+/* Stats Item */
+.stat-item {
+    @apply flex items-center justify-between p-4 rounded-xl bg-slate-50 dark:bg-slate-700/50;
+}
+
+.stat-icon {
+    @apply flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br;
+}
+
+.stat-icon.blue {
+    @apply from-blue-500 to-indigo-500 text-white;
+}
+
+.stat-icon.purple {
+    @apply from-purple-500 to-pink-500 text-white;
+}
+
+.stat-icon.green {
+    @apply from-emerald-500 to-teal-500 text-white;
+}
+
+.stat-content {
+    @apply flex-1 ml-4;
+}
+
+.stat-value {
+    @apply text-2xl font-bold text-slate-900 dark:text-white;
+}
+
+.stat-label {
+    @apply text-sm font-medium text-slate-500 dark:text-slate-400;
+}
+
+/* Achievement Cards */
+.achievement-card {
+    @apply relative overflow-hidden rounded-xl p-4 bg-gradient-to-br transition-all duration-200 hover:scale-105;
+}
+
+.achievement-card.gold {
+    @apply from-amber-400 to-amber-600;
+}
+
+.achievement-card.platinum {
+    @apply from-slate-400 to-slate-600;
+}
+
+.achievement-card.diamond {
+    @apply from-blue-400 to-indigo-600;
+}
+
+.achievement-icon {
+    @apply text-3xl mb-2;
+}
+
+.achievement-title {
+    @apply font-semibold text-white;
+}
+
+.achievement-subtitle {
+    @apply text-sm text-white/80;
+}
+
+/* Buttons */
+.icon-button {
+    @apply inline-flex items-center justify-center w-8 h-8 rounded-lg text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-700 transition-colors;
+}
+
+/* Chart Customization */
+#language-chart, #activity-chart {
+    @apply !w-full !h-full;
+}
+
+/* Animations */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 14px;
+}
+
+::-webkit-scrollbar-track {
+    @apply bg-slate-100 dark:bg-slate-800;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-600 rounded-full border-4 border-solid border-slate-100 dark:border-slate-800;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-slate-500;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .stats-card {
+        @apply p-4;
+    }
+
+    .stat-item {
+        @apply p-3;
+    }
+
+    .stat-icon {
+        @apply w-10 h-10;
+    }
+
+    .stat-value {
+        @apply text-xl;
+    }
+}
+
+/* Dark Mode Transitions */
+.dark .transition-colors {
+    @apply transition-all duration-200;
+}
+
+/* Loading Animation */
+.loading-pulse {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: .5;
+    }
+}

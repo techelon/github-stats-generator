@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitInsights Pro | Enterprise GitHub Analytics Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    animation: {
+                        'gradient': 'gradient 8s linear infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'left center'
+                            },
+                            '50%': {
+                                'background-size': '200% 200%',
+                                'background-position': 'right center'
+                            }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+    <style>
+        /* Base styles directly in HTML */
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        
+        /* Custom scrollbar styles */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #22c55e;
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #15803d;
+        }
+    </style>
+</head>
+<body class="bg-white selection:bg-brand-200 selection:text-brand-900">
+    <!-- Announcement Banner -->
+    <div class="relative isolate flex items-center gap-x-6 overflow-hidden bg-brand-50 px-6 py-2.5 sm:px-3.5 sm:before:flex-1">
+        <div class="absolute left-[max(-7rem,calc(50%-52rem))] top-1/2 -z-10 -translate-y-1/2 transform-gpu blur-2xl">
+            <div class="aspect-[577/310] w-[36.0625rem] bg-gradient-to-r from-brand-500 to-brand-300 opacity-30"></div>
+        </div>
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
+            <p class="text-sm leading-6 text-gray-900">
+                <strong class="font-semibold">GitInsights Pro 2025</strong>
+                <svg viewBox="0 0 2 2" class="mx-2 inline h-0.5 w-0.5 fill-current">
+                    <circle cx="1" cy="1" r="1" />
+                </svg>
+                New features available for enterprise users
+            </p>
+            <a href="#" class="flex-none rounded-full bg-brand-900 px-3.5 py-1 text-sm font-semibold text-white shadow-sm hover:bg-brand-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-900">
+                Learn more <span aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+        <div class="flex flex-1 justify-end">
+            <button type="button" class="-m-3 p-3 focus-visible:outline-offset-[-4px]">
+                <span class="sr-only">Dismiss</span>
+                <svg class="h-5 w-5 text-gray-900" viewBox="0 0 20 20" fill="currentColor">
+                    <path d="M6.28 5.22a.75.75 0 00-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 101.06 1.06L10 11.06l3.72 3.72a.75.75 0 101.06-1.06L11.06 10l3.72-3.72a.75.75 0 00-1.06-1.06L10 8.94 6.28 5.22z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-lg border-b border-brand-100/50 transition-all duration-300">
+        <div class="max-w-[2000px] mx-auto">
+            <div class="px-4 sm:px-6 lg:px-8">
+                <div class="flex h-16 items-center justify-between">
+                    <!-- Logo Section -->
+                    <div class="flex items-center">
+                        <a href="#" class="flex items-center space-x-3">
+                            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 shadow-lg shadow-brand-500/25">
+                                <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                                </svg>
+                            </div>
+                            <span class="text-2xl font-bold bg-gradient-to-r from-brand-600 to-brand-500 bg-clip-text text-transparent">
+                                GitInsights<span class="text-gray-900">Pro</span>
+                            </span>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:flex md:items-center md:space-x-8">
+                        <a href="#generator" class="text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors duration-200 ease-in-out">Generator</a>
+                        <a href="#features" class="text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors duration-200 ease-in-out">Features</a>
+                        <a href="#analytics" class="text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors duration-200 ease-in-out">Analytics</a>
+                        <a href="#about" class="text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors duration-200 ease-in-out">About</a>
+                        <a href="#pricing" class="text-sm font-medium text-gray-700 hover:text-brand-600 transition-colors duration-200 ease-in-out">Pricing</a>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="hidden sm:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-brand-700 hover:text-brand-800 transition-colors duration-200 ease-in-out">
+                            Sign in
+                        </a>
+                        <a href="#generator" class="inline-flex items-center justify-center px-4 py-2 text-sm font-semibold text-white bg-brand-600 hover:bg-brand-700 rounded-xl shadow-lg shadow-brand-500/25 transition-all duration-200 ease-in-out hover:shadow-brand-500/35">
+                            Get Started
+                            <svg class="ml-2 -mr-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </a>
+                        
+                        <!-- Mobile Menu Button -->
+                        <button type="button" class="md:hidden inline-flex items-center justify-center p-2 rounded-lg text-gray-700 hover:text-brand-600 hover:bg-brand-50 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500">
+                            <span class="sr-only">Open menu</span>
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div class="hidden md:hidden">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#generator" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50">Generator</a>
+                <a href="#features" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50">Features</a>
+                <a href="#analytics" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50">Analytics</a>
+                <a href="#about" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50">About</a>
+                <a href="#pricing" class="block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-brand-50">Pricing</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+<section class="relative min-h-screen flex items-center py-20 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 -z-10">
+        <!-- Gradient Background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-brand-50 to-white dark:from-gray-900 dark:to-gray-800"></div>
+        
+        <!-- Animated Circles -->
+        <div class="absolute top-0 left-1/4 w-72 h-72 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute top-0 right-1/4 w-72 h-72 bg-brand-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        <div class="absolute bottom-1/4 left-1/3 w-72 h-72 bg-brand-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+        
+        <!-- Grid Pattern -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000,transparent)]"></div>
+    </div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Column - Content -->
+            <div class="relative z-10 max-w-xl mx-auto lg:mx-0">
+                <!-- Announcement Badge -->
+                <div class="inline-flex items-center rounded-full px-3 py-1 text-sm font-medium bg-brand-100 text-brand-800 mb-8 animate-fade-in-up">
+                    <svg class="mr-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697A4.001 4.001 0 0 1 11.5 2.5h1A4.001 4.001 0 0 1 16.5 6.5v1a4.001 4.001 0 0 1-2.197 3.665l-1.303.565q-.524.227-.524.784v1.486m0 0h.006a2 2 0 0 1 .142.727V16.5a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2v-2.273a2 2 0 0 1 .142-.727H7.5m0 0h.006"/>
+                    </svg>
+                    New: Advanced Analytics Dashboard
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-gray-900 dark:text-white mb-6 animate-fade-in-up animation-delay-200">
+                    Transform Your
+                    <span class="inline-flex flex-col h-[calc(theme(fontSize.7xl)*theme(lineHeight.tight))] overflow-hidden">
+                        <ul class="block animate-text-slide text-brand-600 [&_li]:block">
+                            <li>GitHub Stats</li>
+                            <li>Code Progress</li>
+                            <li>Dev Journey</li>
+                            <li>GitHub Stats</li>
+                        </ul>
+                    </span>
+                    into Insights
+                </h1>
+
+                <!-- Description -->
+                <p class="text-lg sm:text-xl text-gray-600 dark:text-gray-300 mb-8 animate-fade-in-up animation-delay-400">
+                    Advanced analytics and beautiful visualizations for your GitHub profile. Get detailed insights, track progress, and showcase your achievements with professional stats.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row gap-4 animate-fade-in-up animation-delay-600">
+                    <a href="#generator" 
+                       class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-brand-600 rounded-xl shadow-lg shadow-brand-500/25 hover:bg-brand-700 transition-all duration-200 group">
+                        Generate Stats
+                        <svg class="ml-2 -mr-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                        </svg>
+                    </a>
+                    <a href="#features" 
+                       class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-gray-700 bg-gray-100 rounded-xl hover:bg-gray-200 transition-all duration-200">
+                        View Features
+                    </a>
+                </div>
+
+                <!-- Trust Indicators -->
+                <div class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-800 animate-fade-in-up animation-delay-800">
+                    <div class="grid grid-cols-3 gap-8">
+                        <div class="flex flex-col">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Active Users</dt>
+                            <dd class="text-3xl font-bold text-brand-600">500K+</dd>
+                        </div>
+                        <div class="flex flex-col">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Data Points</dt>
+                            <dd class="text-3xl font-bold text-brand-600">1B+</dd>
+                        </div>
+                        <div class="flex flex-col">
+                            <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Satisfaction</dt>
+                            <dd class="text-3xl font-bold text-brand-600">99%</dd>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column - Interactive Preview -->
+            <div class="relative lg:mt-0 animate-fade-in-up animation-delay-1000">
+                <!-- Main Preview Card -->
+                <div class="relative">
+                    <!-- Decorative Elements -->
+                    <div class="absolute -inset-0.5 bg-gradient-to-r from-brand-500 to-brand-600 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-gradient"></div>
+                    
+                    <!-- Card Content -->
+                    <div class="relative bg-white dark:bg-gray-800 rounded-2xl shadow-2xl p-8">
+                        <!-- Stats Preview -->
+                        <div class="space-y-8">
+                            <!-- Profile Summary -->
+                            <div class="flex items-center space-x-4">
+                                <div class="h-12 w-12 rounded-full bg-brand-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 dark:text-white">@techelon</h3>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">Full Stack Developer</p>
+                                </div>
+                            </div>
+
+                            <!-- Stats Grid -->
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Repositories</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-brand-600">45+</dd>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Contributions</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-brand-600">2.4K</dd>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                                    <dt class="text-sm font-medium text-gray-500 dark:text-gray-400">Followers</dt>
+                                    <dd class="mt-1 text-2xl font-semibold text-brand-600">180</dd>
+                                </div>
+                            </div>
+
+                            <!-- Activity Chart -->
+                            <div class="bg-gray-50 dark:bg-gray-700/50 rounded-lg p-4">
+                                <h4 class="text-sm font-medium text-gray-500 dark:text-gray-400 mb-4">Contribution Activity</h4>
+                                <div class="h-24 flex items-end gap-1">
+                                    <!-- Animated Activity Bars -->
+                                    <div class="w-1/12 bg-brand-200 rounded-t animate-grow" style="height: 40%"></div>
+                                    <div class="w-1/12 bg-brand-300 rounded-t animate-grow animation-delay-100" style="height: 60%"></div>
+                                    <div class="w-1/12 bg-brand-400 rounded-t animate-grow animation-delay-200" style="height: 80%"></div>
+                                    <div class="w-1/12 bg-brand-500 rounded-t animate-grow animation-delay-300" style="height: 100%"></div>
+                                    <div class="w-1/12 bg-brand-400 rounded-t animate-grow animation-delay-400" style="height: 70%"></div>
+                                    <div class="w-1/12 bg-brand-300 rounded-t animate-grow animation-delay-500" style="height: 50%"></div>
+                                    <div class="w-1/12 bg-brand-200 rounded-t animate-grow animation-delay-600" style="height: 30%"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Action Button -->
+                        <button class="absolute -bottom-4 right-8 flex items-center justify-center p-4 bg-brand-600 text-white rounded-xl shadow-lg transform hover:-translate-y-1 transition-all duration-200">
+                            <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Floating Elements -->
+                <div class="absolute -right-4 top-1/4 animate-float">
+                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="flex-shrink-0">
+                                <div class="h-10 w-10 rounded-full bg-green-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium text-gray-900 dark:text-white">Streak Updated</p>
+                                <p class="text-xs text-gray-500 dark:text-gray-400">100 days and counting!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    @keyframes blob {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(20px, -50px) scale(1.1); }
+        50% { transform: translate(-20px, 20px) scale(0.9); }
+        75% { transform: translate(20px, 50px) scale(0.95); }
+    }
+
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes text-slide {
+        0% { transform: translateY(0); }
+        25% { transform: translateY(-100%); }
+        50% { transform: translateY(-200%); }
+        75% { transform: translateY(-300%); }
+        100% { transform: translateY(-400%); }
+    }
+
+    @keyframes grow {
+        from { transform: scaleY(0); }
+        to { transform: scaleY(1); }
+    }
+
+    .animate-blob {
+        animation: blob 7s infinite;
+    }
+
+    .animate-fade-in-up {
+        animation: fade-in-up 0.8s ease-out forwards;
+    }
+
+    .animate-text-slide {
+        animation: text-slide 8s cubic-bezier(0.83, 0, 0.17, 1) infinite;
+    }
+
+    .animate-grow {
+        animation: grow 1s ease-out forwards;
+    }
+
+    .animation-delay-100 {
+        animation-delay: 0.1s;
+    }
+    .animation-delay-200 {
+        animation-delay: 0.2s;
+    }
+    .animation-delay-300 {
+        animation-delay: 0.3s;
+    }
+    .animation-delay-400 {
+        animation-delay: 0.4s;
+    }
+    .animation-delay-500 {
+        animation-delay: 0.5s;
+    }
+    .animation-delay-600 {
+        animation-delay: 0.6s;
+    }
+    .animation-delay-800 {
+        animation-delay: 0.8s;
+    }
+    .animation-delay-1000 {
+        animation-delay: 1s;
+    }
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+    .animation-delay-4000 {
+        animation-delay: 4s;
+    }
+</style>
+
+    
+<!-- Generator Section -->
+<section id="generator" class="py-24 relative">
+    <!-- Background Gradient -->
+    <div class="absolute inset-0 -z-10 bg-[radial-gradient(45rem_50rem_at_top,theme(colors.brand.50),white)]"></div>
+    
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Status Bar -->
+            <div class="bg-white rounded-lg shadow-sm p-4 mb-8 flex items-center justify-between">
+                <div class="flex items-center space-x-6">
+                    <div class="flex items-center space-x-2">
+                        <span class="h-2 w-2 bg-green-500 rounded-full animate-pulse"></span>
+                        <span class="text-sm text-gray-600">API Status: Online</span>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <span class="font-mono">UTC: 2025-04-16 05:54:12</span>
+                    </div>
+                    <div class="text-sm text-gray-600">
+                        <span>API Rate Limit: </span>
+                        <span class="font-mono text-brand-600">58/60</span>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="text-sm text-gray-600 hover:text-brand-600" id="help-btn">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                    </button>
+                    <button class="text-sm text-gray-600 hover:text-brand-600" id="settings-btn">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Main Card -->
+            <div class="bg-white rounded-2xl shadow-xl ring-1 ring-gray-900/10">
+                <div class="p-8">
+                    <!-- Header -->
+                    <div class="flex items-center justify-between mb-8">
+                        <div>
+                            <h2 class="text-3xl font-bold text-gray-900 mb-2">GitHub Stats Generator</h2>
+                            <p class="text-gray-600">Generate beautiful statistics and insights for any GitHub profile</p>
+                        </div>
+                        <div class="flex items-center space-x-4">
+                            <button class="text-sm text-gray-600 hover:text-brand-600 flex items-center">
+                                <svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                                </svg>
+                                Favorites
+                            </button>
+                            <button class="text-sm text-gray-600 hover:text-brand-600 flex items-center">
+                                <svg class="h-5 w-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                History
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Tabs -->
+                    <div class="border-b border-gray-200 mb-8">
+                        <nav class="-mb-px flex space-x-8">
+                            <button class="tab-btn active border-brand-500 text-brand-600 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
+                                Statistics
+                            </button>
+                            <button class="tab-btn text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
+                                Insights
+                            </button>
+                            <button class="tab-btn text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
+                                Compare
+                            </button>
+                            <button class="tab-btn text-gray-500 hover:text-gray-700 hover:border-gray-300 whitespace-nowrap pb-4 px-1 border-b-2 font-medium text-sm">
+                                Embed
+                            </button>
+                        </nav>
+                    </div>
+
+                    <!-- Input Form -->
+                    <div class="space-y-8">
+                        <!-- Username Input with Suggestions -->
+                        <div>
+                            <label for="username" class="block text-sm font-medium text-gray-700 mb-2">
+                                GitHub Username
+                                <span class="ml-2 text-xs text-gray-500">(Recent: octocat, microsoft, google)</span>
+                            </label>
+                            <div class="relative">
+                                <div class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+                                    <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                    </svg>
+                                </div>
+                                <input type="text" 
+                                       id="username" 
+                                       value="techelon"
+                                       placeholder="Enter GitHub username" 
+                                       class="block w-full rounded-lg border-0 py-3 pl-10 pr-32 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-brand-600">
+                                <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+                                    <button class="text-brand-600 hover:text-brand-700" id="fetch-user">
+                                        Fetch User
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Options Grid -->
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Theme Selection -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Theme</label>
+                                <select id="theme-select" class="block w-full rounded-lg border-0 py-3 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-brand-600">
+                                    <option value="github">GitHub</option>
+                                    <option value="dracula">Dracula</option>
+                                    <option value="radical">Radical</option>
+                                    <option value="tokyonight">Tokyo Night</option>
+                                    <option value="ocean">Ocean Dark</option>
+                                    <option value="calm">Calm Light</option>
+                                    <option value="gradient">Gradient</option>
+                                    <option value="custom">Custom Theme</option>
+                                </select>
+                            </div>
+
+                            <!-- Layout Selection -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Layout</label>
+                                <select id="layout-select" class="block w-full rounded-lg border-0 py-3 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-brand-600">
+                                    <option value="default">Default</option>
+                                    <option value="compact">Compact</option>
+                                    <option value="detailed">Detailed</option>
+                                    <option value="charts">Charts Only</option>
+                                    <option value="minimal">Minimal</option>
+                                    <option value="card">Card Style</option>
+                                    <option value="custom">Custom Layout</option>
+                                </select>
+                            </div>
+
+                            <!-- Locale Selection -->
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Locale</label>
+                                <select id="locale-select" class="block w-full rounded-lg border-0 py-3 pl-4 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-brand-600">
+                                    <option value="en">English</option>
+                                    <option value="es">Español</option>
+                                    <option value="fr">Français</option>
+                                    <option value="de">Deutsch</option>
+                                    <option value="ja">日本語</option>
+                                    <option value="ko">한국어</option>
+                                    <option value="zh">中文</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Stats Configuration -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-base font-semibold text-gray-900">Statistics Configuration</h3>
+                                <button type="button" class="text-sm text-brand-600 hover:text-brand-700">
+                                    Reset to Default
+                                </button>
+                            </div>
+
+                            <!-- Stats Options Grid -->
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                                <!-- General Stats -->
+                                <div class="space-y-4">
+                                    <h4 class="text-sm font-medium text-gray-700">General</h4>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="show-avatar" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Show Avatar</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="show-bio" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Show Bio</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="show-location" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Show Location</span>
+                                    </label>
+                                </div>
+
+                                <!-- Contribution Stats -->
+                                <div class="space-y-4">
+                                    <h4 class="text-sm font-medium text-gray-700">Contributions</h4>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="private-contributions" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Private Contributions</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="show-streaks" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Show Streaks</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="contrib-graph" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Contribution Graph</span>
+                                    </label>
+                                </div>
+
+                                <!-- Repository Stats -->
+                                <div class="space-y-4">
+                                    <h4 class="text-sm font-medium text-gray-700">Repositories</h4>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="repo-insights" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Repository Insights</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="top-langs" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Top Languages</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="stars-forks" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Stars & Forks</span>
+                                    </label>
+                                </div>
+
+                                <!-- Additional Stats -->
+                                <div class="space-y-4">
+                                    <h4 class="text-sm font-medium text-gray-700">Additional</h4>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="achievements" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Achievements</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="activity-graph" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Activity Graph</span>
+                                    </label>
+                                    <label class="flex items-center">
+                                        <input type="checkbox" id="metrics" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                        <span class="ml-2 text-sm text-gray-700">Detailed Metrics</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Advanced Options -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <div class="flex items-center justify-between mb-6">
+                                <h3 class="text-base font-semibold text-gray-900">Advanced Options</h3>
+                                <button type="button" class="text-sm text-brand-600 hover:text-brand-700" id="customize-btn">
+                                    Customize
+                                </button>
+                            </div>
+
+                            <!-- Advanced Options Grid -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <!-- Time Range -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Time Range</label>
+                                    <select class="block w-full rounded-lg border-0 py-2 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-brand-600">
+                                        <option>Last 30 days</option>
+                                        <option>Last 6 months</option>
+                                        <option>Last year</option>
+                                        <option>All time</option>
+                                        <option>Custom range</option>
+                                    </select>
+                                </div>
+
+                                <!-- Card Width -->
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700 mb-2">Card Width</label>
+                                    <select class="block w-full rounded-lg border-0 py-2 pl-3 pr-10 text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-brand-600">
+                                        <option>Compact (495px)</option>
+                                        <option>Default (850px)</option>
+                                        <option>Wide (1200px)</option>
+                                        <option>Custom width</option>
+                                    </select>
+                                </div>
+
+                                <!-- Include/Exclude -->
+                                <div class="md:col-span-2 space-y-4">
+                                    <h4 class="text-sm font-medium text-gray-700">Include/Exclude</h4>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                            <span class="ml-2 text-sm text-gray-700">Archived Repos</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                            <span class="ml-2 text-sm text-gray-700">Forked Repos</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600">
+                                            <span class="ml-2 text-sm text-gray-700">Private Repos</span>
+                                        </label>
+                                        <label class="flex items-center">
+                                            <input type="checkbox" class="rounded border-gray-300 text-brand-600 focus:ring-brand-600" checked>
+                                            <span class="ml-2 text-sm text-gray-700">Starred Repos</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Generate Button -->
+                        <button type="button" 
+                                id="generate-btn"
+                                class="w-full inline-flex items-center justify-center py-3 px-4 rounded-lg text-base font-semibold text-white bg-brand-600 hover:bg-brand-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 transition-colors">
+                            Generate Stats
+                            <svg class="ml-2 -mr-1 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- Preview Section -->
+                    <div class="mt-8">
+                        <div class="bg-gray-50 rounded-xl border border-gray-200">
+                            <!-- Preview Header -->
+                            <div class="flex items-center justify-between p-4 border-b border-gray-200">
+                                <div class="flex items-center space-x-4">
+                                    <h3 class="text-lg font-semibold text-gray-900">Preview</h3>
+                                    <span class="text-sm text-gray-500">Last updated: Just now</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <!-- View Options -->
+                                    <div class="flex items-center space-x-2">
+                                        <button class="p-1.5 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-100">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                                            </svg>
+                                        </button>
+                                        <button class="p-1.5 rounded text-gray-500 hover:text-gray-700 hover:bg-gray-100">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+
+                                    <!-- Action Buttons -->
+                                    <div class="flex items-center space-x-2">
+                                        <button type="button" 
+                                                id="copy-btn"
+                                                class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                                            <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"/>
+                                            </svg>
+                                            Copy
+                                        </button>
+                                        <button type="button" 
+                                                id="export-btn"
+                                                class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                                            <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                                            </svg>
+                                            Export
+                                        </button>
+                                        <button type="button" 
+                                                id="share-btn"
+                                                class="inline-flex items-center px-3 py-1.5 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500">
+                                            <svg class="h-4 w-4 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/>
+                                            </svg>
+                                            Share
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview Content -->
+                            <div class="p-6">
+                                <div id="preview-content" class="bg-white rounded-lg p-6 shadow-sm">
+                                    <!-- Loading State -->
+                                    <div class="animate-pulse">
+                                        <div class="h-32 bg-gray-200 rounded-lg mb-4"></div>
+                                        <div class="grid grid-cols-3 gap-4">
+                                            <div class="h-20 bg-gray-200 rounded-lg"></div>
+                                            <div class="h-20 bg-gray-200 rounded-lg"></div>
+                                            <div class="h-20 bg-gray-200 rounded-lg"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Preview Footer with Quick Settings -->
+                            <div class="border-t border-gray-200 p-4">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-4">
+                                        <!-- Quick Size Adjustment -->
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm text-gray-500">Size:</span>
+                                            <div class="flex items-center space-x-1">
+                                                <button class="p-1 rounded hover:bg-gray-100 text-gray-600">S</button>
+                                                <button class="p-1 rounded bg-brand-50 text-brand-600">M</button>
+                                                <button class="p-1 rounded hover:bg-gray-100 text-gray-600">L</button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Quick Theme Switch -->
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm text-gray-500">Theme:</span>
+                                            <div class="flex items-center space-x-1">
+                                                <button class="w-6 h-6 rounded-full bg-white border border-gray-300" title="Light"></button>
+                                                <button class="w-6 h-6 rounded-full bg-gray-900" title="Dark"></button>
+                                                <button class="w-6 h-6 rounded-full bg-gradient-to-r from-blue-500 to-purple-500" title="Gradient"></button>
+                                            </div>
+                                        </div>
+
+                                        <!-- Quick Language Switch -->
+                                        <div class="flex items-center space-x-2">
+                                            <span class="text-sm text-gray-500">Language:</span>
+                                            <select class="text-sm border-0 bg-transparent text-gray-600 focus:ring-0">
+                                                <option value="en">EN</option>
+                                                <option value="es">ES</option>
+                                                <option value="fr">FR</option>
+                                                <option value="de">DE</option>
+                                                <option value="ja">JA</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <!-- Quick Actions -->
+                                    <div class="flex items-center space-x-2">
+                                        <button class="text-sm text-gray-600 hover:text-brand-600">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+                                            </svg>
+                                        </button>
+                                        <button class="text-sm text-gray-600 hover:text-brand-600">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="text-sm text-gray-600 hover:text-brand-600">
+                                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Additional Options -->
+                    <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Embed Code Section -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-sm font-medium text-gray-900 mb-4">Embed Code</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1">Markdown</label>
+                                    <div class="relative">
+                                        <input type="text" 
+                                               value="![GitHub Stats](https://github-stats.com/api/techelon)" 
+                                               class="block w-full rounded-lg border-0 py-2 pr-10 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-brand-600"
+                                               readonly>
+                                        <button class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label class="block text-xs text-gray-500 mb-1">HTML</label>
+                                    <div class="relative">
+                                        <input type="text" 
+                                               value='<img src="https://github-stats.com/api/techelon" alt="GitHub Stats">' 
+                                               class="block w-full rounded-lg border-0 py-2 pr-10 text-sm text-gray-900 ring-1 ring-inset ring-gray-300 focus:ring-2 focus:ring-brand-600"
+                                               readonly>
+                                        <button class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-400 hover:text-gray-600">
+                                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Share Options -->
+                        <div class="bg-gray-50 rounded-lg p-6">
+                            <h3 class="text-sm font-medium text-gray-900 mb-4">Share Options</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <button class="flex items-center justify-center px-4 py-2 rounded-lg bg-[#1DA1F2] text-white hover:bg-[#1a8cd8]">
+                                    <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                                    </svg>
+                                    Twitter
+                                </button>
+                                <button class="flex items-center justify-center px-4 py-2 rounded-lg bg-gray-900 text-white hover:bg-gray-800">
+                                    <svg class="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                                        <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                    </svg>
+                                    GitHub
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           
+        </div>
+    </div>
+</section>
+
+
+  <!-- Features Section -->
+<section id="features" class="relative py-24 overflow-hidden">
+    <!-- Animated Background - Changed from dark to light -->
+    <div class="absolute inset-0 -z-10">
+        <!-- Changed gradient from dark to light -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white to-gray-50"></div>
+        <div class="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-brand-50/50 to-transparent"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000,transparent)]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header - Changed text colors to dark -->
+        <div class="text-center max-w-3xl mx-auto mb-20">
+            <span class="inline-flex items-center rounded-full px-4 py-1 text-sm font-medium bg-brand-100 text-brand-800 mb-4">
+                <svg class="mr-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+                Pro Features
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight text-gray-900">
+                Advanced Features for
+                <span class="text-brand-600">Professionals</span>
+            </h2>
+            <p class="mt-6 text-lg leading-8 text-gray-600">
+                Everything you need to analyze and showcase your GitHub presence, powered by advanced analytics and real-time data.
+            </p>
+        </div>
+
+        <!-- Features Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Feature Cards - Changed background to white -->
+            <!-- Feature Card 1 - Analytics -->
+            <div class="group relative">
+                <div class="absolute -inset-2 bg-gradient-to-r from-brand-500 to-brand-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                <div class="relative h-full p-8 bg-white ring-1 ring-gray-900/5 rounded-xl transition-all duration-300 hover:shadow-xl">
+                    <!-- Card content remains the same, just ensuring background is white -->
+                    <div class="space-y-6">
+                        <!-- Icon Container -->
+                        <div class="inline-flex p-4 bg-brand-50 rounded-xl">
+                            <svg class="h-8 w-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+
+                        <!-- Content - Changed text colors to dark -->
+                        <div class="space-y-3">
+                            <h3 class="text-xl font-semibold text-gray-900">
+                                Advanced Analytics
+                            </h3>
+                            <p class="text-gray-600">
+                                Comprehensive insights into your GitHub activity with detailed performance metrics and trend analysis.
+                            </p>
+                        </div>
+
+                        <!-- Feature List - Changed text colors to dark -->
+                        <ul class="space-y-3">
+                            <li class="flex items-center text-sm text-gray-600">
+                                <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Contribution Analysis
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Activity Tracking
+                            </li>
+                            <li class="flex items-center text-sm text-gray-600">
+                                <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                                Performance Metrics
+                            </li>
+                        </ul>
+
+                        <!-- Learn More Link -->
+                        <a href="#" class="inline-flex items-center text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors duration-200">
+                            Learn more
+                            <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+           <!-- Feature Card 2 - Themes -->
+<div class="group relative">
+    <div class="absolute -inset-2 bg-gradient-to-r from-brand-500 to-brand-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+    <div class="relative h-full p-8 bg-white ring-1 ring-gray-900/5 rounded-xl transition-all duration-300 hover:shadow-xl">
+        <div class="space-y-6">
+            <!-- Icon Container -->
+            <div class="inline-flex p-4 bg-brand-50 rounded-xl">
+                <svg class="h-8 w-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                </svg>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-3">
+                <h3 class="text-xl font-semibold text-gray-900">
+                    Custom Themes
+                </h3>
+                <p class="text-gray-600">
+                    Create your unique visual identity with customizable themes and branded statistics displays.
+                </p>
+            </div>
+
+            <!-- Feature List -->
+            <ul class="space-y-3">
+                <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Custom Color Schemes
+                </li>
+                <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Layout Options
+                </li>
+                <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Brand Integration
+                </li>
+            </ul>
+
+            <!-- Live Preview Button -->
+            <button class="inline-flex items-center text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors duration-200">
+                Try live preview
+                <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Feature Card 3 - Updates -->
+<div class="group relative">
+    <div class="absolute -inset-2 bg-gradient-to-r from-brand-500 to-brand-600 rounded-xl blur opacity-0 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+    <div class="relative h-full p-8 bg-white ring-1 ring-gray-900/5 rounded-xl transition-all duration-300 hover:shadow-xl">
+        <div class="space-y-6">
+            <!-- Icon Container -->
+            <div class="inline-flex p-4 bg-brand-50 rounded-xl">
+                <svg class="h-8 w-8 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+            </div>
+
+            <!-- Content -->
+            <div class="space-y-3">
+                <div class="flex items-center">
+                    <h3 class="text-xl font-semibold text-gray-900">
+                        Real-time Updates
+                    </h3>
+                    <span class="ml-3 inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800">
+                        Live
+                    </span>
+                </div>
+                <p class="text-gray-600">
+                    Stay current with automatic updates and instant data synchronization across your projects.
+                </p>
+            </div>
+
+            <!-- Feature List -->
+            <ul class="space-y-3">
+                <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Instant Sync
+                </li>
+                <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Auto-refresh
+                </li>
+                <li class="flex items-center text-sm text-gray-600">
+                    <svg class="h-5 w-5 mr-2 text-brand-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Push Notifications
+                </li>
+            </ul>
+
+            <!-- Status Indicator -->
+            <div class="flex items-center text-sm text-gray-600">
+                <span class="relative flex h-3 w-3 mr-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                System Status: Operational
+            </div>
+        </div>
+    </div>
+</div>
+
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="mt-16 text-center">
+            <a href="#pricing" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-brand-600 rounded-xl shadow-lg shadow-brand-500/25 hover:bg-brand-700 transition-all duration-200 group">
+                Get Started
+                <svg class="ml-2 -mr-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+<!-- About Us Section -->
+<section id="about" class="relative py-24 overflow-hidden">
+    <!-- Animated Background Elements -->
+    <div class="absolute inset-0 -z-10">
+        <!-- Gradient Background -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white to-brand-50 dark:from-gray-900 dark:to-gray-800"></div>
+        
+        <!-- Animated Circles -->
+        <div class="absolute bottom-0 right-1/4 w-72 h-72 bg-brand-200 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
+        <div class="absolute top-1/2 left-1/4 w-72 h-72 bg-brand-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
+        
+        <!-- Grid Pattern -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000,transparent)]"></div>
+    </div>
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Section Header -->
+        <div class="max-w-2xl mx-auto text-center mb-20">
+            <h2 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-4xl mb-4 relative inline-block">
+                About GetStats Pro
+                <div class="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-full"></div>
+            </h2>
+            <p class="mt-6 text-lg leading-8 text-gray-600 dark:text-gray-300">
+                Transforming GitHub data into actionable insights for developers and teams worldwide
+            </p>
+        </div>
+
+        <!-- Main Content Grid -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Left Column - Illustration -->
+<div class="relative">
+    <!-- Main Illustration Container -->
+    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl animate-fade-in-up bg-white dark:bg-gray-800 p-8">
+        <!-- Enhanced SVG Illustration -->
+        <svg class="w-full h-96" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Background Elements -->
+            <circle cx="200" cy="200" r="160" fill="#22C55E" fill-opacity="0.05"/>
+            <circle cx="200" cy="200" r="120" fill="#22C55E" fill-opacity="0.08"/>
+            
+            <!-- Connection Lines -->
+            <path d="M200 120 L160 200 M200 120 L240 200 M160 200 L240 200" 
+                  stroke="#22C55E" stroke-width="2" stroke-dasharray="4 4"/>
+
+            <!-- Statistics Elements -->
+            <g transform="translate(140, 80)">
+                <!-- Contributions Graph -->
+                <rect x="0" y="0" width="120" height="60" rx="8" fill="#DCFCE7"/>
+                <rect x="10" y="10" width="15" height="15" rx="2" fill="#22C55E"/>
+                <rect x="30" y="10" width="15" height="15" rx="2" fill="#22C55E" fill-opacity="0.7"/>
+                <rect x="50" y="10" width="15" height="15" rx="2" fill="#22C55E" fill-opacity="0.5"/>
+                <rect x="10" y="30" width="15" height="15" rx="2" fill="#22C55E" fill-opacity="0.3"/>
+                <rect x="30" y="30" width="15" height="15" rx="2" fill="#22C55E" fill-opacity="0.6"/>
+                <rect x="50" y="30" width="15" height="15" rx="2" fill="#22C55E" fill-opacity="0.4"/>
+            </g>
+
+            <!-- GitHub Profile Elements -->
+            <g transform="translate(120, 180)">
+                <!-- Profile Card -->
+                <rect x="0" y="0" width="160" height="100" rx="12" fill="white" stroke="#22C55E" stroke-width="2"/>
+                <circle cx="40" cy="30" r="20" fill="#22C55E"/>
+                <rect x="70" y="20" width="70" height="8" rx="4" fill="#22C55E" fill-opacity="0.7"/>
+                <rect x="70" y="35" width="50" height="6" rx="3" fill="#22C55E" fill-opacity="0.5"/>
+                
+                <!-- Stats -->
+                <rect x="20" y="60" width="120" height="30" rx="6" fill="#DCFCE7"/>
+                <path d="M30 75 L50 65 L70 80 L90 70 L110 75" 
+                      stroke="#22C55E" stroke-width="2" fill="none"/>
+            </g>
+
+            <!-- Animated Elements -->
+            <g class="animate-pulse">
+                <!-- Pulse Effect Elements -->
+                <circle cx="200" cy="200" r="180" stroke="#22C55E" stroke-width="2" stroke-opacity="0.2"/>
+                <circle cx="200" cy="200" r="190" stroke="#22C55E" stroke-width="1" stroke-opacity="0.1"/>
+            </g>
+
+            <!-- Interactive Elements -->
+            <g class="cursor-pointer transform hover:scale-105 transition-transform">
+                <!-- Repository Icons -->
+                <g transform="translate(300, 150)">
+                    <rect x="0" y="0" width="40" height="40" rx="8" fill="#22C55E" fill-opacity="0.1"/>
+                    <path d="M10 20h20M20 10v20" stroke="#22C55E" stroke-width="2"/>
+                </g>
+                <g transform="translate(80, 280)">
+                    <rect x="0" y="0" width="40" height="40" rx="8" fill="#22C55E" fill-opacity="0.1"/>
+                    <path d="M10 20h20M20 10v20" stroke="#22C55E" stroke-width="2"/>
+                </g>
+            </g>
+
+            <!-- Decorative Dots -->
+            <g fill="#22C55E">
+                <circle cx="100" cy="100" r="2" fill-opacity="0.5"/>
+                <circle cx="300" cy="100" r="2" fill-opacity="0.5"/>
+                <circle cx="100" cy="300" r="2" fill-opacity="0.5"/>
+                <circle cx="300" cy="300" r="2" fill-opacity="0.5"/>
+            </g>
+        </svg>
+    </div>
+
+    <!-- Decorative Background Elements -->
+    <div class="absolute -bottom-6 -right-6 w-72 h-72 bg-brand-100 rounded-2xl -z-10 animate-float"></div>
+    <div class="absolute -top-6 -left-6 w-72 h-72 border-2 border-brand-200 rounded-2xl -z-10 animate-float animation-delay-2000"></div>
+
+    <!-- Floating Stats Cards -->
+    <div class="absolute -right-8 bottom-1/4 animate-float animation-delay-1000 z-20">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-4 transform hover:-translate-y-1 transition-transform duration-200">
+            <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                    <div class="h-12 w-12 rounded-full bg-brand-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">Global Community</p>
+                    <p class="text-2xl font-bold text-brand-600">1M+</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="absolute -left-8 top-1/4 animate-float animation-delay-500 z-20">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-xl p-4 transform hover:-translate-y-1 transition-transform duration-200">
+            <div class="flex items-center space-x-4">
+                <div class="flex-shrink-0">
+                    <div class="h-12 w-12 rounded-full bg-brand-100 flex items-center justify-center">
+                        <svg class="h-6 w-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </div>
+                </div>
+                <div>
+                    <p class="text-sm font-medium text-gray-900 dark:text-white">Enterprise Ready</p>
+                    <p class="text-2xl font-bold text-brand-600">100%</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add these additional styles -->
+<style>
+    @keyframes float {
+        0%, 100% { transform: translateY(0) translateX(0); }
+        50% { transform: translateY(-10px) translateX(5px); }
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .animate-pulse {
+        animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+</style>
+
+            <!-- Right Column - Content -->
+            <div class="space-y-8">
+                <!-- Vision Section -->
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative p-6 bg-white dark:bg-gray-800 ring-1 ring-gray-900/5 rounded-lg leading-none">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="h-12 w-12 rounded-lg bg-brand-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Our Vision</h3>
+                                <p class="text-gray-600 dark:text-gray-300">Empowering developers and teams with actionable insights to make data-driven decisions and improve their GitHub workflow.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mission Section -->
+                <div class="relative group">
+                    <div class="absolute -inset-1 bg-gradient-to-r from-brand-500 to-brand-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+                    <div class="relative p-6 bg-white dark:bg-gray-800 ring-1 ring-gray-900/5 rounded-lg leading-none">
+                        <div class="flex items-center space-x-4">
+                            <div class="flex-shrink-0">
+                                <div class="h-12 w-12 rounded-lg bg-brand-100 flex items-center justify-center">
+                                    <svg class="h-6 w-6 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-2">Our Mission</h3>
+                                <p class="text-gray-600 dark:text-gray-300">To provide the most comprehensive and intuitive GitHub analytics platform that helps developers showcase their work and teams optimize their development process.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Values Grid -->
+                <div class="grid grid-cols-2 gap-6">
+                    <!-- Value 1 -->
+                    <div class="relative group">
+                        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="h-10 w-10 rounded-lg bg-brand-100 flex items-center justify-center">
+                                    <svg class="h-5 w-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="text-base font-semibold text-gray-900 dark:text-white">Innovation</h4>
+                            </div>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Constantly pushing boundaries to provide cutting-edge analytics solutions.</p>
+                        </div>
+                    </div>
+
+                    <!-- Value 2 -->
+                    <div class="relative group">
+                        <div class="p-6 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                            <div class="flex items-center space-x-3 mb-4">
+                                <div class="h-10 w-10 rounded-lg bg-brand-100 flex items-center justify-center">
+                                    <svg class="h-5 w-5 text-brand-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+                                    </svg>
+                                </div>
+                                <h4 class="text-base font-semibold text-gray-900 dark:text-white">Community</h4>
+                            </div>
+                            <p class="text-sm text-gray-600 dark:text-gray-300">Building and supporting a global community of developers.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Stats -->
+                <div class="grid grid-cols-3 gap-6">
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                        <div class="text-3xl font-bold text-brand-600 mb-1">50+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Team Members</div>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                        <div class="text-3xl font-bold text-brand-600 mb-1">20+</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Countries</div>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-sm">
+                        <div class="text-3xl font-bold text-brand-600 mb-1">24/7</div>
+                        <div class="text-sm text-gray-600 dark:text-gray-400">Support</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom CTA -->
+        <div class="mt-20 text-center">
+            <a href="#generator" class="inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-brand-600 rounded-xl shadow-lg shadow-brand-500/25 hover:bg-brand-700 transition-all duration-200 group">
+                Start Analyzing Your GitHub Profile
+                <svg class="ml-2 -mr-1 h-5 w-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+  <!-- FAQ Section -->
+<section id="faq" class="relative py-24 bg-white overflow-hidden">
+    <!-- Background Elements -->
+    <div class="absolute inset-0 -z-10">
+        <div class="absolute inset-0 bg-gradient-to-b from-white to-gray-50/50"></div>
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#8882_1px,transparent_1px),linear-gradient(to_bottom,#8882_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_0%,#000,transparent)]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-4xl mx-auto">
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <span class="inline-flex items-center rounded-full px-4 py-1 text-sm font-medium bg-brand-100 text-brand-800 mb-4">
+                    <svg class="mr-1.5 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    Help Center
+                </span>
+                <h2 class="text-4xl font-bold tracking-tight text-gray-900 mb-4">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-lg text-gray-600">
+                    Everything you need to know about GetStats Pro and its features
+                </p>
+            </div>
+
+            <div class="space-y-6">
+                <!-- FAQ Item 1 -->
+                <div class="bg-white shadow-sm rounded-xl ring-1 ring-gray-900/5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex items-center justify-between w-full px-6 py-5 focus:outline-none">
+                        <span class="flex items-center text-lg font-semibold text-gray-900">
+                            <span class="mr-3 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-brand-100 text-brand-600 text-sm font-medium">1</span>
+                            How does GetStats Pro work?
+                        </span>
+                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            GetStats Pro uses GitHub's API to analyze your profile, repositories, and contributions.
+                            We process this data through our advanced analytics engine to generate comprehensive insights
+                            and visualizations about your GitHub activity.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="bg-white shadow-sm rounded-xl ring-1 ring-gray-900/5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex items-center justify-between w-full px-6 py-5 focus:outline-none">
+                        <span class="flex items-center text-lg font-semibold text-gray-900">
+                            <span class="mr-3 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-brand-100 text-brand-600 text-sm font-medium">2</span>
+                            Is my GitHub data secure?
+                        </span>
+                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            Yes, absolutely! We take security seriously. We only access public GitHub data unless explicitly authorized. 
+                            All data is encrypted, and we never store sensitive information. We comply with GitHub's security 
+                            best practices and data protection guidelines.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="bg-white shadow-sm rounded-xl ring-1 ring-gray-900/5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex items-center justify-between w-full px-6 py-5 focus:outline-none">
+                        <span class="flex items-center text-lg font-semibold text-gray-900">
+                            <span class="mr-3 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-brand-100 text-brand-600 text-sm font-medium">3</span>
+                            Can I customize the statistics display?
+                        </span>
+                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            Yes! GetStats Pro offers extensive customization options. You can choose from various themes, 
+                            layouts, and color schemes. You can also select which metrics to display and how they should 
+                            be visualized.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="bg-white shadow-sm rounded-xl ring-1 ring-gray-900/5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex items-center justify-between w-full px-6 py-5 focus:outline-none">
+                        <span class="flex items-center text-lg font-semibold text-gray-900">
+                            <span class="mr-3 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-brand-100 text-brand-600 text-sm font-medium">4</span>
+                            How often is the data updated?
+                        </span>
+                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            GetStats Pro updates data in real-time for most metrics. Your GitHub activity is synchronized 
+                            automatically, and statistics are refreshed instantly when new data is available. Historical 
+                            data is archived and accessible at any time.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="bg-white shadow-sm rounded-xl ring-1 ring-gray-900/5 transition-all duration-200 hover:shadow-md">
+                    <button class="flex items-center justify-between w-full px-6 py-5 focus:outline-none">
+                        <span class="flex items-center text-lg font-semibold text-gray-900">
+                            <span class="mr-3 flex h-6 w-6 flex-none items-center justify-center rounded-full bg-brand-100 text-brand-600 text-sm font-medium">5</span>
+                            Do you offer team/organization features?
+                        </span>
+                        <svg class="h-6 w-6 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                        </svg>
+                    </button>
+                    <div class="px-6 pb-6">
+                        <p class="text-gray-600">
+                            Yes! Our Enterprise plan includes team collaboration features, organization-wide analytics, 
+                            and advanced reporting capabilities. You can manage multiple team members, track team performance, 
+                            and generate comprehensive organization-level insights.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Help Center Link -->
+            <div class="mt-12 text-center">
+                <a href="#support" class="inline-flex items-center text-brand-600 hover:text-brand-700">
+                    <span class="text-base font-medium">Still have questions?</span>
+                    <span class="ml-2 text-base font-medium">Visit our Help Center →</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Section -->
+<footer class="relative pt-20 pb-12 bg-gray-900 overflow-hidden">
+    <!-- Decorative Elements -->
+    <div class="absolute inset-0 -z-10">
+        <!-- Gradient Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-b from-gray-900/95 to-gray-900"></div>
+        
+        <!-- Animated Circles -->
+        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-600/20 rounded-full mix-blend-overlay filter blur-3xl animate-blob"></div>
+        <div class="absolute top-1/2 left-1/4 w-96 h-96 bg-brand-500/20 rounded-full mix-blend-overlay filter blur-3xl animate-blob animation-delay-2000"></div>
+        
+        <!-- Grid Pattern -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:14px_24px]"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- Main Footer Content -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-gray-800">
+            <!-- Company Info -->
+            <div class="lg:col-span-4 space-y-8">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-r from-brand-600 to-brand-500 shadow-lg">
+                        <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="text-2xl font-bold text-white">
+                        Get<span class="text-brand-400">Stats</span>Pro
+                    </span>
+                </div>
+
+                <!-- Description -->
+                <p class="text-gray-400 text-base max-w-sm">
+                    Transform your GitHub profile into beautiful analytics and insights. Track your progress and showcase your achievements.
+                </p>
+
+                <!-- Social Links -->
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="lg:col-span-2">
+                <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Product</h3>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="#generator" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            Generator
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#features" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            Features
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#pricing" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            Pricing
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#faq" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            FAQ
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Resources -->
+            <div class="lg:col-span-2">
+                <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Resources</h3>
+                <ul class="space-y-3">
+                    <li>
+                        <a href="#" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            Documentation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            API Reference
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            Blog
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="text-base text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                            Support
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Newsletter -->
+            <div class="lg:col-span-4">
+                <h3 class="text-sm font-semibold text-white uppercase tracking-wider mb-4">Stay Updated</h3>
+                <p class="text-base text-gray-400 mb-4">
+                    Get notified about new features and updates.
+                </p>
+                <form class="flex flex-col sm:flex-row gap-3">
+                    <div class="flex-grow">
+                        <label for="email-address" class="sr-only">Email address</label>
+                        <input type="email" id="email-address" name="email-address" required 
+                               class="block w-full rounded-lg bg-gray-800 border border-gray-700 py-3 px-4 text-base text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500"
+                               placeholder="Enter your email">
+                    </div>
+                    <button type="submit" 
+                            class="flex-none inline-flex justify-center items-center rounded-lg bg-brand-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2 focus:ring-offset-gray-900 transition-colors duration-200">
+                        Subscribe
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Bottom Bar -->
+        <div class="pt-8 flex flex-col sm:flex-row justify-between items-center">
+            <!-- Copyright -->
+            <p class="text-gray-400 text-base">
+                © 2025 GetStats Pro. All rights reserved.
+            </p>
+
+            <!-- Legal Links -->
+            <nav class="flex space-x-6 mt-4 sm:mt-0">
+                <a href="#" class="text-sm text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                    Privacy Policy
+                </a>
+                <a href="#" class="text-sm text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                    Terms of Service
+                </a>
+                <a href="#" class="text-sm text-gray-400 hover:text-brand-400 transition-colors duration-200">
+                    Cookie Policy
+                </a>
+            </nav>
+        </div>
+    </div>
+</footer>
+
+<!-- Additional styles for animations -->
+<style>
+    @keyframes blob {
+        0%, 100% { transform: translate(0, 0) scale(1); }
+        25% { transform: translate(20px, -50px) scale(1.1); }
+        50% { transform: translate(-20px, 20px) scale(0.9); }
+        75% { transform: translate(20px, 50px) scale(0.95); }
+    }
+
+    .animate-blob {
+        animation: blob 7s infinite;
+    }
+
+    .animation-delay-2000 {
+        animation-delay: 2s;
+    }
+</style>
+    <script>
+        // Add your JavaScript here
+        function toggleMobileMenu() {
+            const mobileMenu = document.querySelector('.md\\:hidden');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll event listener for header
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('nav');
+            if (window.scrollY > 0) {
+                header.classList.add('shadow-md');
+            } else {
+                header.classList.remove('shadow-md');
+            }
+        });
+    </script>
+
+    <script src="main.js"></script>
+</body>
+</html>
